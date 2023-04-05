@@ -39,3 +39,10 @@ class Menu:
          self.text_rect = self.text.get_rect()
          self.text_rect.center = (self.HALF_SCREEN_WIDTH, self.HALF_SCREEN_HEIGHT)
 
+
+
+
+
+
+
+

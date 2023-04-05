@@ -1,6 +1,6 @@
 import pygame
 import os
-
+import pygame.mixer
 # Global Constants
 TITLE = "Chrome Dino Runner"
 SCREEN_HEIGHT = 600
@@ -71,3 +71,5 @@ HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/SmallHeart.png'))
 
 DEFAULT_TYPE = "default"
 FONT_STYLE = 'freesansbold.ttf'
+
+

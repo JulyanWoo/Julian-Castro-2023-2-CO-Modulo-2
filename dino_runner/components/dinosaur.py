@@ -1,8 +1,6 @@
 import pygame
 from pygame.sprite import Sprite
-
 from dino_runner.utils.constants import RUNNING,DUCKING,JUMPING
-
 class Dinosaur(Sprite):
 
     X_POS = 80
@@ -42,6 +40,7 @@ class Dinosaur(Sprite):
              self.dino_duck = False
              self.dino_run = False
              self.dino_jump = True
+             
 
          elif userInput [pygame.K_DOWN] and not self.dino_jump:
              self.dino_duck = True
@@ -71,6 +70,7 @@ class Dinosaur(Sprite):
          if self.jump_vel < -self.JUMP_VEL:
             self.dino_jump = False 
             self.jump_vel = self.JUMP_VEL
+       
     
     def duck(self):
          
@@ -78,12 +78,11 @@ class Dinosaur(Sprite):
          self.dino_rect = self.image.get_rect()
          self.dino_rect.x = self.X_POS
          self.dino_rect.y =self.Y_POS_DUCK 
-         self.step_index += 1
+         self.step_index += 1 
     
        
     def draw(self, screen):
         screen.blit(self.image, (self.dino_rect.x, self.dino_rect.y))
-        screen.fill((255, 0, 255), self.dino_rect)
 
     def reset_dinosaur(self):
           self.dino_duck = False
