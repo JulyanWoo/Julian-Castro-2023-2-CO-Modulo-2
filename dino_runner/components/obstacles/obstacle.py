@@ -14,7 +14,7 @@ class Obstacle(Sprite):
         self.counter = 0
        
 
-    def type_definition(self):
+    def type_definition(self): #para la animacion del pajaro
 
         if self.obstacle_type == 3: 
             self.rect = self.image[0].get_rect() 

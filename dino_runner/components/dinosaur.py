@@ -83,3 +83,16 @@ class Dinosaur(Sprite):
        
     def draw(self, screen):
         screen.blit(self.image, (self.dino_rect.x, self.dino_rect.y))
+        screen.fill((255, 0, 255), self.dino_rect)
+
+    def reset_dinosaur(self):
+          self.dino_duck = False
+          self.dino_run = True
+          self.dino_jump = False
+          self.step_index = 0
+
+          self.image = self.run_img[0]
+          self.dino_rect = self.image.get_rect()
+          self.dino_rect.x = self.X_POS
+          self.dino_rect.y = self.Y_POS
+          self.jump_vel = self.JUMP_VEL
