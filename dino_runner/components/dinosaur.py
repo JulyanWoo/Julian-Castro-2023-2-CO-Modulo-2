@@ -1,10 +1,13 @@
 import pygame
 from pygame.sprite import Sprite
-from dino_runner.utils.constants import RUNNING,DUCKING,JUMPING, DEFAULT_TYPE, RUNNING_SHIELD, DUCKING_SHIELD, JUMPING_SHIELD, SHIELD_TYPE
+from dino_runner.utils.constants import RUNNING,DUCKING,JUMPING, DEFAULT_TYPE, RUNNING_SHIELD, DUCKING_SHIELD, JUMPING_SHIELD, SHIELD_TYPE, HAMMER_TYPE, DUCKING_HAMMER,JUMPING_HAMMER,RUNNING_HAMMER
 
-RUN_IMG= { DEFAULT_TYPE: RUNNING, SHIELD_TYPE: RUNNING_SHIELD } 
-JUMP_IMG= { DEFAULT_TYPE: JUMPING, SHIELD_TYPE: JUMPING_SHIELD } 
-DUCK_IMG= { DEFAULT_TYPE: DUCKING, SHIELD_TYPE: DUCKING_SHIELD }
+
+
+RUN_IMG= { DEFAULT_TYPE: RUNNING, SHIELD_TYPE: RUNNING_SHIELD,  HAMMER_TYPE: RUNNING_HAMMER} 
+JUMP_IMG= { DEFAULT_TYPE: JUMPING, SHIELD_TYPE: JUMPING_SHIELD, HAMMER_TYPE: JUMPING_HAMMER} 
+DUCK_IMG= { DEFAULT_TYPE: DUCKING, SHIELD_TYPE: DUCKING_SHIELD, HAMMER_TYPE: DUCKING_HAMMER}
+
 
 class Dinosaur(Sprite):
 
@@ -14,16 +17,20 @@ class Dinosaur(Sprite):
     JUMP_VEL = 8.5
 
     def __init__(self):
+      self.playing = True
       self.type = DEFAULT_TYPE
       self.image= RUN_IMG[self.type][0]
 
       self.dino_duck = False
       self.dino_run = True
       self.dino_jump = False
+      self.died = False
       self.step_index = 0
 
       
       self.dino_rect = self.image.get_rect()
+      self.dino_rect.width *= 1
+      self.dino_rect.height *= 1
       self.dino_rect.x = self.X_POS
       self.dino_rect.y = self.Y_POS
       self.jump_vel = self.JUMP_VEL
@@ -39,6 +46,9 @@ class Dinosaur(Sprite):
              self.run()
          if self.dino_jump: 
              self.jump()
+         if self.died:
+             self.die()
+
          if self.step_index>= 10: 
             self.step_index = 0
 
@@ -57,6 +67,7 @@ class Dinosaur(Sprite):
              self.dino_duck = False
              self.dino_run = True
              self.dino_jump = False
+        
 
     def run(self):
          
@@ -84,6 +95,9 @@ class Dinosaur(Sprite):
          self.dino_rect.x = self.X_POS
          self.dino_rect.y =self.Y_POS_DUCK 
          self.step_index += 1 
+    
+
+
     
        
     def draw(self, screen):
