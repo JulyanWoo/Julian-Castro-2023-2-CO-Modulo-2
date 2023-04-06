@@ -21,6 +21,7 @@ class Obstacle(Sprite):
         else:
              self.rect = self.image[self.obstacle_type].get_rect() 
     
+
     def update(self, game_speed, obstacles): 
 
         self.rect.x -= game_speed   

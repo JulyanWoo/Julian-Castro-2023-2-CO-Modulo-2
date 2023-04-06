@@ -1,6 +1,11 @@
 import pygame
 from pygame.sprite import Sprite
-from dino_runner.utils.constants import RUNNING,DUCKING,JUMPING
+from dino_runner.utils.constants import RUNNING,DUCKING,JUMPING, DEFAULT_TYPE, RUNNING_SHIELD, DUCKING_SHIELD, JUMPING_SHIELD, SHIELD_TYPE
+
+RUN_IMG= { DEFAULT_TYPE: RUNNING, SHIELD_TYPE: RUNNING_SHIELD } 
+JUMP_IMG= { DEFAULT_TYPE: JUMPING, SHIELD_TYPE: JUMPING_SHIELD } 
+DUCK_IMG= { DEFAULT_TYPE: DUCKING, SHIELD_TYPE: DUCKING_SHIELD }
+
 class Dinosaur(Sprite):
 
     X_POS = 80
@@ -9,21 +14,22 @@ class Dinosaur(Sprite):
     JUMP_VEL = 8.5
 
     def __init__(self):
-    
-      self.duck_img = DUCKING 
-      self.run_img = RUNNING
-      self.jump_img = JUMPING
+      self.type = DEFAULT_TYPE
+      self.image= RUN_IMG[self.type][0]
 
       self.dino_duck = False
       self.dino_run = True
       self.dino_jump = False
       self.step_index = 0
 
-      self.image = self.run_img[0]
+      
       self.dino_rect = self.image.get_rect()
       self.dino_rect.x = self.X_POS
       self.dino_rect.y = self.Y_POS
       self.jump_vel = self.JUMP_VEL
+
+      self.has_power_up = False
+      self.power_time_up = 0
 
     def update(self, userInput):
          
@@ -54,7 +60,7 @@ class Dinosaur(Sprite):
 
     def run(self):
          
-         self.image= RUNNING[0] if self.step_index < 5 else RUNNING[1]
+         self.image = RUN_IMG[self.type] [self.step_index // 5]
          self.dino_rect = self.image.get_rect()
          self.dino_rect.x = self.X_POS
          self.dino_rect.y =self.Y_POS 
@@ -62,8 +68,7 @@ class Dinosaur(Sprite):
         
     def jump(self):
          
-         self.image = self.jump_img
-
+         self.image = JUMP_IMG[self.type] 
          if self.dino_jump:
             self.dino_rect.y -= self.jump_vel * 4
             self.jump_vel -= 1
@@ -74,7 +79,7 @@ class Dinosaur(Sprite):
     
     def duck(self):
          
-         self.image= DUCKING[0] if self.step_index < 5 else DUCKING[1]
+         self.image = DUCK_IMG[self.type] [self.step_index // 5]
          self.dino_rect = self.image.get_rect()
          self.dino_rect.x = self.X_POS
          self.dino_rect.y =self.Y_POS_DUCK 
@@ -90,7 +95,7 @@ class Dinosaur(Sprite):
           self.dino_jump = False
           self.step_index = 0
 
-          self.image = self.run_img[0]
+         
           self.dino_rect = self.image.get_rect()
           self.dino_rect.x = self.X_POS
           self.dino_rect.y = self.Y_POS

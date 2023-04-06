@@ -22,17 +22,17 @@ class Score(Sprite):
     def score(self, message):
         self.text = self.font.render(message, True, (0, 0, 0)) 
         self.text_rect = self.text.get_rect()
-        self.text_rect.center = (550, 360)
+        self.text_rect.center = (self.HALF_SCREEN_WIDTH, 360 )
 
     def total_score(self, message):
         self.text1 = self.font.render(message, True, (0, 0, 0)) 
         self.text_rect1 = self.text1.get_rect()
-        self.text_rect1.center = (550, 390)
+        self.text_rect1.center = (self.HALF_SCREEN_WIDTH, 390)
 
     def total_deaths(self, message):
         self.text2 = self.font.render(message, True, (0, 0, 0)) 
         self.text_rect2 = self.text2.get_rect()
-        self.text_rect2.center = (550, 425)
+        self.text_rect2.center = (self.HALF_SCREEN_WIDTH, 425)
 
     def update_message2(self, message):
          self.text3 = self.font.render(message, True, (0, 0, 0)) 
